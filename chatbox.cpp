@@ -7,12 +7,14 @@ chatbox::chatbox(QString content,int a,QWidget *parent)
 {
     ui->setupUi(this);
     if(a){
+
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/openai-black.png").scaled(ui->label->size()));
     }else {
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/user.png").scaled(ui->label->size()));
         ui->label->move(1000,20);
         ui->textEdit->move(470,20);
     }
+    peoormac=a;
     con = content;
     setAttribute(Qt::WA_StyledBackground, true);
     ui->textEdit->setReadOnly(true);
@@ -53,4 +55,9 @@ chatbox::~chatbox()
 QString chatbox::getcontent()
 {
     return con;
+}
+
+int chatbox::getpeoormac()
+{
+    return peoormac;
 }

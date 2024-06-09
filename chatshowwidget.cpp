@@ -36,23 +36,26 @@ QJsonArray chatshowwidget::gethistorymess()
 {
     QJsonArray arr;
     if (vec.size() < 6) {
-        for (size_t i = 0; i < vec.size(); i++) {
+        qDebug()<<"----------------------------";
+        for (int i = vec.size()-1; i >=0; i--) {
+            qDebug()<<i;
             QJsonObject o;
-            if (i % 2 == 0) {
+            if (vec[i]->getpeoormac()==0) {
                 // 用户消息
                 o["role"] = "user";
             } else {
                 // 助手消息
                 o["role"] = "assistant";
             }
+            qDebug()<<"----------------------------";
             // 假设 getcontent() 是获取消息内容的方法
             o["content"] = vec[i]->getcontent();
-            arr.append(o);
+            arr.append(o);qDebug()<<"----------------------------";
         }
     }else{
-        for (size_t i = 0; i < 6; i++) {
+        for (int i = vec.size()-1; i >=vec.size()-6; i--) {
             QJsonObject o;
-            if (i % 2 == 0) {
+            if (vec[i]->getpeoormac()==0) {
                 // 用户消息
                 o["role"] = "user";
             } else {
@@ -64,6 +67,9 @@ QJsonArray chatshowwidget::gethistorymess()
             arr.append(o);
         }
     }
+    qDebug()<<"------------------------------------------";
+    qDebug()<<arr;
+    qDebug()<<"------------------------------------------";
     return arr;
 }
 void chatshowwidget::addnewbox(int b,chatbox *a)

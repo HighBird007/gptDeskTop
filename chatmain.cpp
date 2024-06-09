@@ -51,6 +51,7 @@ void chatmain::on_pushButton_clicked()
     messageObject["role"] = "user";
     messageObject["content"] = content;
     QJsonArray messagesArray = panelmap[currentchatid]->gethistorymess();
+    qDebug()<<"-----------------------";
     messagesArray.append(messageObject);
     QJsonObject requestBody ;
     requestBody["model"] = userchose;
@@ -63,6 +64,7 @@ void chatmain::on_pushButton_clicked()
      panelmap[currentchatid]->addnewbox(box);
     connecttoserve::getinstance().sendtoserve(jsonDoc);
     ui->textEdit_2->clear();
+    qDebug()<<obj;
 }
 
 void chatmain::receivehistory(QJsonObject data)
