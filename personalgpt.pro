@@ -13,7 +13,9 @@ CONFIG += c++17
 SOURCES += \
     abstractsqlmodel.cpp \
     chatbox.cpp \
+    chatloginmodel.cpp \
     chatmain.cpp \
+    chatshowwidget.cpp \
     connecttoserve.cpp \
     loginsqlmodel.cpp \
     main.cpp \
@@ -24,7 +26,9 @@ SOURCES += \
 HEADERS += \
     abstractsqlmodel.h \
     chatbox.h \
+    chatloginmodel.h \
     chatmain.h \
+    chatshowwidget.h \
     connecttoserve.h \
     loginsqlmodel.h \
     mainwindow.h \
@@ -34,6 +38,7 @@ HEADERS += \
 FORMS += \
     chatbox.ui \
     chatmain.ui \
+    chatshowwidget.ui \
     mainwindow.ui \
     statusshow.ui
 

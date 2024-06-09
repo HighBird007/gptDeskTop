@@ -8,6 +8,8 @@
 #include <QVBoxLayout>
 #include <QSpacerItem>
 #include <statusshow.h>
+#include <chatloginmodel.h>
+#include <chatshowwidget.h>
 namespace Ui {
 class chatmain;
 }
@@ -30,6 +32,9 @@ private:
     QStringList strlist;
     QString userchose;
     int offsethistory = 0;
+    chatloginmodel chatsqlmodel;
+    std::map<int ,chatshowwidget *> panelmap;
+    int currentchatid=1;
 private:
      void receivehistory(QJsonObject);
     void gethistory();

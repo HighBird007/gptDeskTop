@@ -9,10 +9,12 @@ MainWindow::MainWindow(QWidget *parent)
     start_connect();
     this->setFixedSize(this->size());
     ui->comboBox->setEditable(true);
+    this->setWindowTitle("登录");
+    this->setWindowFlags( Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
     connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,[=](bool b){
         if(b){
-
             sql.insertnewuser(a,p);
             chatmain *cm=new chatmain();
             cm->show();

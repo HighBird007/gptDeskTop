@@ -11,7 +11,6 @@ class abstractsqlmodel
 
 public:
     abstractsqlmodel();
-   virtual void initsql() = 0;
 
 protected:
     QSqlDatabase sql;

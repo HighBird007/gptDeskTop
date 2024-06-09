@@ -6,9 +6,12 @@ chatmain::chatmain(QWidget *parent)
     , ui(new Ui::chatmain)
 {
     ui->setupUi(this);
-    l=new QVBoxLayout(this);
-    s=new QSpacerItem(20,0,QSizePolicy::Minimum,QSizePolicy::Expanding);
-    ui->scrollAreaWidgetContents->setLayout(l);
+    chatshowwidget *showwidget = new chatshowwidget;
+    this->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    this->setWindowTitle("聊天界面");
+    this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
+    ui->scrollArea->setWidget(showwidget);
+    panelmap.insert(std::make_pair(currentchatid,showwidget));
     connect(&connecttoserve::getinstance(), &connecttoserve::getdata, this, [=](QJsonObject o) {
         // 获取choices数组
         QJsonArray choicesArray = o["choices"].toArray();
@@ -21,8 +24,8 @@ chatmain::chatmain(QWidget *parent)
             QString chatContent = messageObject["content"].toString();
             //1是机器人
            chatbox *box =new chatbox(chatContent,1,this);
-            l->addWidget(box);
-            l->addSpacerItem(s);
+            chatsqlmodel.insertchat(chatContent,1);
+           panelmap[currentchatid]->addnewbox(box);
         }
     });
     connect(&connecttoserve::getinstance(),&connecttoserve::history,this,&chatmain::receivehistory);
@@ -41,25 +44,23 @@ chatmain::~chatmain()
 }
 
 void chatmain::on_pushButton_clicked()
-{    QString content=ui->textEdit_2->toPlainText();
+{
+    QString content=ui->textEdit_2->toPlainText();
+    chatsqlmodel.insertchat(content,0);
     QJsonObject messageObject;
     messageObject["role"] = "user";
     messageObject["content"] = content;
-
-    QJsonArray messagesArray;
+    QJsonArray messagesArray = panelmap[currentchatid]->gethistorymess();
     messagesArray.append(messageObject);
-
-    QJsonObject requestBody;
+    QJsonObject requestBody ;
     requestBody["model"] = userchose;
-    qDebug()<<userchose;
     requestBody["messages"] = messagesArray;
     QJsonObject obj;
     obj["type"]="chat";
     obj["data"]=requestBody;
     QJsonDocument jsonDoc(obj);
     chatbox *box =new chatbox(content,0,this);
-    l->addWidget(box);
-    l->addSpacerItem(s);
+     panelmap[currentchatid]->addnewbox(box);
     connecttoserve::getinstance().sendtoserve(jsonDoc);
     ui->textEdit_2->clear();
 }
@@ -70,9 +71,8 @@ void chatmain::receivehistory(QJsonObject data)
     qDebug()<<data;
              for(int i = 0 ;i<arr.size();i++){
            QJsonObject o =arr[i].toObject();
-                 qDebug()<<o;
                  chatbox * box =new chatbox(o["chat"].toString(),o["peoormac"].toInt());
-           l->insertWidget(0,box);
+                 panelmap[currentchatid]->addnewbox(0,box);
              }
 }
 

@@ -7,7 +7,7 @@ class loginsqlmodel : public abstractsqlmodel
 {
 public:
     loginsqlmodel();
-    void initsql() override;
+    void initsql();
     QVector<std::pair<QString,QString>> getlastlogin();
     void insertnewuser(QString,QString);
     ~loginsqlmodel();

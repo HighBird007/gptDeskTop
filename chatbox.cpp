@@ -10,9 +10,10 @@ chatbox::chatbox(QString content,int a,QWidget *parent)
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/openai-black.png").scaled(ui->label->size()));
     }else {
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/user.png").scaled(ui->label->size()));
-        ui->label->move(900,20);
+        ui->label->move(1000,20);
         ui->textEdit->move(470,20);
     }
+    con = content;
     setAttribute(Qt::WA_StyledBackground, true);
     ui->textEdit->setReadOnly(true);
     ui->textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -47,4 +48,9 @@ chatbox::chatbox(QString content,int a,QWidget *parent)
 chatbox::~chatbox()
 {
     delete ui;
+}
+
+QString chatbox::getcontent()
+{
+    return con;
 }

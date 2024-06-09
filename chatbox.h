@@ -14,9 +14,10 @@ class chatbox : public QWidget
 public:
     explicit chatbox(QString content, int a, QWidget *parent = nullptr);
     ~chatbox();
-
+    QString getcontent();
 private:
     Ui::chatbox *ui;
+    QString con;
 };
 
 #endif // CHATBOX_H
