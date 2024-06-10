@@ -10,6 +10,8 @@
 #include <statusshow.h>
 #include <chatloginmodel.h>
 #include <chatshowwidget.h>
+#include <QLabel>
+#include <QMovie>
 namespace Ui {
 class chatmain;
 }

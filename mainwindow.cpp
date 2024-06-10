@@ -11,6 +11,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox->setEditable(true);
     this->setWindowTitle("登录");
     this->setWindowFlags( Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    ui->label_3->setFixedSize(this->size());
+    QTime t=QTime::currentTime();
+    int hour  = t.hour();
+    qDebug()<<hour;
+    QMovie *m;
+    if(hour>=8&&hour<=18){
+        m=new QMovie(":/new/prefix1/G:/nature-4119.gif");
+    }else{
+        m=new QMovie(":/new/prefix1/G:/moon-594.gif");
+    }
+    m->setScaledSize(ui->label_3->size());
+    ui->label_3->setMovie(m);
+    m->start();
+    qDebug()<<this->size();
+    qDebug()<<ui->label_3->size();
 this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
     connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,[=](bool b){
@@ -57,12 +72,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    QTime t=QTime::currentTime();
-    int hour  = t.hour();
-    if(hour>=8&&hour<=18){
-        p.drawPixmap(this->rect(),QPixmap(":/new/prefix1/E:/sunormoon/sun.gif").scaled(this->size()));
-    }else
-    p.drawPixmap(this->rect(),QPixmap(":/new/prefix1/E:/sunormoon/moon.gif").scaled(this->size()));
+
 
 }
 

@@ -28,14 +28,32 @@ chatmain::chatmain(QWidget *parent)
            panelmap[currentchatid]->addnewbox(box);
         }
     });
+    ui->scrollArea->setStyleSheet("QScrollArea { background: transparent; }"
+                              "QScrollArea > QWidget > QWidget { background: transparent; }"
+                              "QScrollBar:vertical { background: #2D2D30; }"
+                              "QScrollBar:horizontal { background: #2D2D30; }");
     connect(&connecttoserve::getinstance(),&connecttoserve::history,this,&chatmain::receivehistory);
-    strlist<<"gpt-4o"<<"gpt-3.5-turbo"<<"gpt-4-turbo-2024-04-09";
+    strlist<<"gpt-4o"<<"gpt-3.5-turbo"<<"gpt-4-turbo";
     ui->comboBox->addItems(strlist);
     userchose = ui->comboBox->currentText();
     connect(ui->comboBox,&QComboBox::currentTextChanged,this,[&](QString a){
         userchose = a;
     });
     gethistory();
+    QLabel *l =new QLabel(this);
+    l->setFixedSize(this->size());
+    l->lower();
+    QMovie *m;
+    QTime t;
+  int  hour = t.hour();
+    if(hour>=8&&hour<=18){
+        m=new QMovie(":/new/prefix1/G:/nature-4119.gif");
+    }else{
+        m=new QMovie(":/new/prefix1/G:/moon-594.gif");
+    }
+    m->setScaledSize(l->size());
+    l->setMovie(m);
+    m->start();
 }
 
 chatmain::~chatmain()
@@ -50,6 +68,7 @@ void chatmain::on_pushButton_clicked()
     QJsonObject messageObject;
     messageObject["role"] = "user";
     messageObject["content"] = content;
+     qDebug()<<"-----------------------";
     QJsonArray messagesArray = panelmap[currentchatid]->gethistorymess();
     qDebug()<<"-----------------------";
     messagesArray.append(messageObject);

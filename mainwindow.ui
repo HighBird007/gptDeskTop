@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="loginbutton">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>80</x>
       <y>170</y>
       <width>75</width>
       <height>23</height>
@@ -25,6 +25,10 @@
     </property>
     <property name="text">
      <string>登录</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>E:/sunormoon/login.png</normaloff>E:/sunormoon/login.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -60,7 +64,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -92,6 +96,25 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>381</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>label_3</zorder>
+   <zorder>loginbutton</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>lineEdit</zorder>
+   <zorder>comboBox</zorder>
+   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
