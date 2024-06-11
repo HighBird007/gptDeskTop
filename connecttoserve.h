@@ -36,4 +36,5 @@ public:
 #define start_connect() connecttoserve::getinstance().startconnect();
 #define user_login(account,password) connecttoserve::getinstance().trylogin(account,password);
 #define singletcpinstance connecttoserve::getinstance();
+#
 #endif // CONNECTTOSERVE_H

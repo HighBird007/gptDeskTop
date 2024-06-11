@@ -3,12 +3,6 @@
 connecttoserve::connecttoserve() {
     socket=new QTcpSocket;
     connect(socket,&QTcpSocket::readyRead,this,&connecttoserve::readdata);
-    // connect(socket,&QTcpSocket::connected,this,[](){
-    //     qDebug()<<"okoko";
-    // });
-    // connect(socket,&QTcpSocket::disconnected,this,[](){
-    //     qDebug()<<"nononon";
-    // });
 }
 
 connecttoserve &connecttoserve::getinstance()
@@ -19,11 +13,9 @@ connecttoserve &connecttoserve::getinstance()
 
 void connecttoserve::startconnect()
 {
-   //socket->connectToHost("127.0.0.1",52310);
-  socket->connectToHost("139.196.150.195",52310);
-   // socket->open(QIODevice::ReadWrite);
+   socket->connectToHost("127.0.0.1",52310);
+ // socket->connectToHost("139.196.150.195",52310);
     socket->waitForConnected(3000);
-    qDebug()<<socket->error()<<"???";
 }
 
 void connecttoserve::trylogin(QString account, QString password)
@@ -54,27 +46,33 @@ void connecttoserve::gethistory()
 
 void connecttoserve::readdata()
 {
-    qDebug()<<"new mess";
     d.append(socket->readAll());
-    QJsonDocument data=QJsonDocument::fromJson(d);
-    if(data.isNull()){
-        return ;
-    }else {
-        d.clear();
-    }
-    QJsonObject obj=data.object();
-    QString type=obj["type"].toString();
-    if(type=="error"){
-        qDebug()<<obj["content"].toString();
-    }
-    if(type=="login"){emit loginjugder(obj["content"].toBool())  ;return ;}
-    if(type=="chat"){
-        emit getdata(obj);
-        return ;
-    }
-    if(type=="history"){
-        emit history(obj);
-        return ;
+    while (true) {
+        int endOfJson = d.indexOf("LxTcpOverTag");
+        if (endOfJson == -1) {
+            // 没有找到完整的JSON对象，等待更多数据
+            break;
+        }
+        // 读取实际数据
+        QByteArray jsonData = d.left(endOfJson);
+       d.remove(0, endOfJson + strlen("LxTcpOverTag"));
+        QJsonParseError parseError;
+        QJsonDocument data = QJsonDocument::fromJson(jsonData, &parseError);
+
+        if (parseError.error == QJsonParseError::NoError) {
+            QJsonObject obj = data.object();
+            QString type = obj["type"].toString();
+            if (type == "error") {
+            } else if (type == "login") {
+                emit loginjugder(obj["content"].toBool());
+            } else if (type == "chat") {
+                emit getdata(obj);
+            } else if (type == "history") {
+                emit history(obj);
+            }
+        } else {
+            qDebug() << "Failed to parse JSON:" << parseError.errorString();
+        }
     }
 }
 

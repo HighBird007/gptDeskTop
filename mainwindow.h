@@ -38,7 +38,5 @@ private:
     QVector<std::pair<QString,QString>> vec;
     loginsqlmodel sql;
     QVector<QString> passwordset;
-protected:
-    void paintEvent(QPaintEvent *);
 };
 #endif // MAINWINDOW_H

@@ -8,26 +8,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     start_connect();
     this->setFixedSize(this->size());
-    ui->comboBox->setEditable(true);
     this->setWindowTitle("登录");
     this->setWindowFlags( Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
+
     ui->label_3->setFixedSize(this->size());
-    QTime t=QTime::currentTime();
-    int hour  = t.hour();
-    qDebug()<<hour;
+    int hour  = QTime::currentTime().hour();
     QMovie *m;
-    if(hour>=8&&hour<=18){
+    if(hour>=8&&hour<=18)
         m=new QMovie(":/new/prefix1/G:/nature-4119.gif");
-    }else{
+    else
         m=new QMovie(":/new/prefix1/G:/moon-594.gif");
-    }
+
     m->setScaledSize(ui->label_3->size());
     ui->label_3->setMovie(m);
     m->start();
-    qDebug()<<this->size();
-    qDebug()<<ui->label_3->size();
-this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
+
     connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
+
     connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,[=](bool b){
         if(b){
             sql.insertnewuser(a,p);
@@ -38,6 +36,9 @@ this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
             QMessageBox::warning(this,"错误","账号或者密码不对");
         }
     });
+
+    //初始化comobox
+    ui->comboBox->setEditable(true);
     vec = sql.getlastlogin();
     for(int i = 0;i<vec.size();i++){
         ui->comboBox->addItem(vec[i].first);
@@ -47,9 +48,8 @@ this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     connect(ui->comboBox,&QComboBox::currentIndexChanged,this,[=](int a){
         ui->lineEdit->setText(passwordset[a]);
     });
-    connect(&udpsocketmodel::getinstance(),&udpsocketmodel::udpnotice,this,[=](QString a){
-        QMessageBox::warning(this,"更新提醒",a);
-    });
+
+
 }
 
 MainWindow::~MainWindow()
@@ -69,10 +69,5 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-void MainWindow::paintEvent(QPaintEvent *)
-{
-    QPainter p(this);
 
-
-}
 

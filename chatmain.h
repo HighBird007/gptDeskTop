@@ -11,6 +11,7 @@
 #include <chatloginmodel.h>
 #include <chatshowwidget.h>
 #include <QLabel>
+#include <QScrollBar>
 #include <QMovie>
 namespace Ui {
 class chatmain;

@@ -16,11 +16,6 @@ chatshowwidget::~chatshowwidget()
     delete ui;
 }
 
-void chatshowwidget::addnewbox(chatbox *a)
-{
-    l->addWidget(a);
-    vec.push_back(a);
-}
 
 int chatshowwidget::getchatid()
 {
@@ -46,7 +41,6 @@ QJsonArray chatshowwidget::gethistorymess()
             // 助手消息
             o["role"] = "assistant";
         }
-        qDebug()<<"----------------------------";
         // getcontent() 是获取消息内容的方法
         o["content"] = vec[i]->getcontent();
         arr.append(o);
@@ -54,9 +48,31 @@ QJsonArray chatshowwidget::gethistorymess()
     }
     return arr;
 }
-void chatshowwidget::addnewbox(int b,chatbox *a)
+
+void chatshowwidget::addhisbox(chatbox *box)
 {
-    l->insertWidget(b,a);
-    vec.push_back(a);
+    l->insertWidget(0,box);
+    vec.push_back(box);
+}
+
+void chatshowwidget::adduserbox(QString content)
+{
+    chatbox *box =new chatbox(content,0);
+    l->addWidget(box);
+    vec.push_back(box);
+}
+
+
+void chatshowwidget::addnewbox(QString id,int peoismac,QString content)
+{
+    auto it = umap.find(id);
+    if(it==umap.end()){
+        chatbox *box =new chatbox(content,peoismac,id,this);
+        l->addWidget(box);
+        vec.push_back(box);
+        umap[id] = box;
+    }else {
+        it->second->appendtext(content);
+    }
 }
 
