@@ -45,6 +45,13 @@ void connecttoserve::sendtoserve(QJsonDocument doc)
     socket->write(doc.toJson());
 }
 
+void connecttoserve::gethistory()
+{
+    QJsonObject o;
+    o["type"]="history";
+    sendtoserve(QJsonDocument(o));
+}
+
 void connecttoserve::readdata()
 {
     qDebug()<<"new mess";
@@ -66,7 +73,6 @@ void connecttoserve::readdata()
         return ;
     }
     if(type=="history"){
-        qDebug()<<"hist";
         emit history(obj);
         return ;
     }

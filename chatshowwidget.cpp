@@ -35,48 +35,23 @@ void chatshowwidget::setchatid(int a)
 QJsonArray chatshowwidget::gethistorymess()
 {
     QJsonArray arr;
-    if (vec.size() < 6) {
+    if(vec.empty())return arr;
+    int sum = 6;
+    for(size_t i =vec.size()-1;i>=0&&sum>=0;i--,sum--){
+        QJsonObject o;
+        if (vec[i]->getpeoormac()==0) {
+            // 用户消息
+            o["role"] = "user";
+        } else {
+            // 助手消息
+            o["role"] = "assistant";
+        }
         qDebug()<<"----------------------------";
-        for (size_t i = vec.size()-1; i > 0; i--) {
-            QJsonObject o;
-            if (vec[i]->getpeoormac()==0) {
-                // 用户消息
-                o["role"] = "user";
-            } else {
-                // 助手消息
-                o["role"] = "assistant";
-            }
-            qDebug()<<"----------------------------";
-            // getcontent() 是获取消息内容的方法
-            o["content"] = vec[i]->getcontent();
-            arr.append(o);
-        }
-    }else{
-        for (size_t i = vec.size()-1; i>vec.size()-6; i--) {
-            QJsonObject o;
-            if (vec[i]->getpeoormac()==0) {
-                // 用户消息
-                o["role"] = "user";
-            } else {
-                // 助手消息
-                o["role"] = "assistant";
-            }
-            //  getcontent() 是获取消息内容的方法
-            o["content"] = vec[i]->getcontent();
-            arr.append(o);
-        }
+        // getcontent() 是获取消息内容的方法
+        o["content"] = vec[i]->getcontent();
+        arr.append(o);
+        if(i==0)break;
     }
-    QJsonObject o;
-    if (vec[0]->getpeoormac()==0) {
-        // 用户消息
-        o["role"] = "user";
-    } else {
-        // 助手消息
-        o["role"] = "assistant";
-    }
-    //  getcontent() 是获取消息内容的方法
-    o["content"] = vec[0]->getcontent();
-    arr.append(o);
     return arr;
 }
 void chatshowwidget::addnewbox(int b,chatbox *a)

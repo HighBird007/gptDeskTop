@@ -11,7 +11,6 @@ class abstractsqlmodel
 
 public:
     abstractsqlmodel();
-
 protected:
     QSqlDatabase sql;
 

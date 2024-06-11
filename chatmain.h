@@ -39,7 +39,7 @@ private:
     int currentchatid=1;
 private:
      void receivehistory(QJsonObject);
-    void gethistory();
+     void init();
 };
 
 #endif // CHATMAIN_H
