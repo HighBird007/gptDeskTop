@@ -13,6 +13,9 @@
 #include <QLabel>
 #include <QScrollBar>
 #include <QMovie>
+#include <userinfo.h>
+#include <chatlabel.h>
+#include <chatlabelsshow.h>
 namespace Ui {
 class chatmain;
 }
@@ -24,23 +27,24 @@ class chatmain : public QWidget
 public:
     explicit chatmain(QWidget *parent = nullptr);
     ~chatmain();
-
 private slots:
     void on_pushButton_clicked();
-
+    void on_pushButton_2_clicked();
 private:
     Ui::chatmain *ui;
     QVBoxLayout *l;
     QSpacerItem *s;
     QStringList strlist;
     QString userchose;
-    int offsethistory = 0;
     chatloginmodel chatsqlmodel;
     std::map<int ,chatshowwidget *> panelmap;
-    int currentchatid=1;
+    int currentchatid=-1;
+    chatLabelsShow *cl;
+
 private:
      void receivehistory(QJsonObject);
      void init();
+     void userChangeChat(int id);
 };
 
 #endif // CHATMAIN_H

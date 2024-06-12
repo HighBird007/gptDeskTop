@@ -2,6 +2,7 @@ QT       += core gui
 QT +=network
 QT += websockets
 QT +=sql
+QT +=charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -13,6 +14,8 @@ RC_ICONS = openai-black.ico
 SOURCES += \
     abstractsqlmodel.cpp \
     chatbox.cpp \
+    chatlabelsshow.cpp \
+    chatlabeltag.cpp \
     chatloginmodel.cpp \
     chatmain.cpp \
     chatshowwidget.cpp \
@@ -21,11 +24,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     statusshow.cpp \
-    udpsocketmodel.cpp
+    udpsocketmodel.cpp \
+    userinfo.cpp
 
 HEADERS += \
     abstractsqlmodel.h \
     chatbox.h \
+    chatlabelsshow.h \
+    chatlabeltag.h \
     chatloginmodel.h \
     chatmain.h \
     chatshowwidget.h \
@@ -33,14 +39,17 @@ HEADERS += \
     loginsqlmodel.h \
     mainwindow.h \
     statusshow.h \
-    udpsocketmodel.h
+    udpsocketmodel.h \
+    userinfo.h
 
 FORMS += \
     chatbox.ui \
+    chatlabelsshow.ui \
     chatmain.ui \
     chatshowwidget.ui \
     mainwindow.ui \
-    statusshow.ui
+    statusshow.ui \
+    userinfo.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

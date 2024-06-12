@@ -13,8 +13,8 @@ connecttoserve &connecttoserve::getinstance()
 
 void connecttoserve::startconnect()
 {
-//   socket->connectToHost("127.0.0.1",52310);
-  socket->connectToHost("139.196.150.195",52310);
+   socket->connectToHost("127.0.0.1",52310);
+ // socket->connectToHost("139.196.150.195",52310);
     socket->waitForConnected(3000);
 }
 
@@ -37,10 +37,25 @@ void connecttoserve::sendtoserve(QJsonDocument doc)
     socket->write(doc.toJson());
 }
 
-void connecttoserve::gethistory()
+void connecttoserve::gethistory(int id)
 {
     QJsonObject o;
     o["type"]="history";
+    o["chatId"]=id;
+    sendtoserve(QJsonDocument(o));
+}
+
+void connecttoserve::getLabels()
+{
+    QJsonObject o;
+    o["type"]="chatLabels";
+    sendtoserve(QJsonDocument(o));
+}
+
+void connecttoserve::createNewTag()
+{
+    QJsonObject o;
+    o["type"]="createNewTag";
     sendtoserve(QJsonDocument(o));
 }
 
@@ -61,6 +76,7 @@ void connecttoserve::readdata()
 
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject obj = data.object();
+            qDebug()<<obj;
             QString type = obj["type"].toString();
             if (type == "error") {
             } else if (type == "login") {
@@ -69,9 +85,9 @@ void connecttoserve::readdata()
                 emit getdata(obj);
             } else if (type == "history") {
                 emit history(obj);
+            }  else if(type =="chatLabels"){
+                emit chatLabelsdata(obj);
             }
-        } else {
-            qDebug() << "Failed to parse JSON:" << parseError.errorString();
         }
     }
 }

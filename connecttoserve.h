@@ -24,17 +24,19 @@ public:
     void trylogin(QString account,QString password);
     bool getloginjudger();
     void sendtoserve(QJsonDocument);
-    void gethistory();
-
+    void gethistory(int id);
+    void getLabels();
+    void createNewTag();
    private slots:
     void   readdata();
    signals:
     void getdata(QJsonObject);
     void loginjugder(bool);
     void history(QJsonObject);
+    void chatLabelsdata(QJsonObject);
 };
 #define start_connect() connecttoserve::getinstance().startconnect();
 #define user_login(account,password) connecttoserve::getinstance().trylogin(account,password);
 #define singletcpinstance connecttoserve::getinstance();
-#
+
 #endif // CONNECTTOSERVE_H

@@ -12,7 +12,6 @@ statusshow::statusshow(QWidget *parent)
     connect(&t,&QTimer::timeout,this,[=]{
         ui->lcdNumber->display(QString::number(current.hour()));
         ui->lcdNumber_2->display(current.minute());
-      //  qDebug()<<"ys";
     });
     ui->lcdNumber->display(QString::number(current.hour()));
     ui->lcdNumber_2->display(current.minute());
