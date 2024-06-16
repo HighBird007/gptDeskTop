@@ -13,8 +13,8 @@ connecttoserve &connecttoserve::getinstance()
 
 void connecttoserve::startconnect()
 {
-   socket->connectToHost("127.0.0.1",52310);
- // socket->connectToHost("139.196.150.195",52310);
+  // socket->connectToHost("127.0.0.1",52310);
+  socket->connectToHost("139.196.150.195",52310);
     socket->waitForConnected(3000);
 }
 

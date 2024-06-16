@@ -38,5 +38,10 @@ private:
     QVector<std::pair<QString,QString>> vec;
     loginsqlmodel sql;
     QVector<QString> passwordset;
+    QLabel *l;
+private:;
+    void initBackGround();
+    void loginJudge(bool);
+    void initAcountAndPassword();
 };
 #endif // MAINWINDOW_H

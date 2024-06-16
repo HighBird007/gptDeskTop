@@ -96,25 +96,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>381</width>
-      <height>291</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <zorder>label_3</zorder>
-   <zorder>loginbutton</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>comboBox</zorder>
-   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
