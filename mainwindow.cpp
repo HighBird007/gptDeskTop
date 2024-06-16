@@ -76,6 +76,26 @@ void MainWindow::initBackGround()
     l->setFixedSize(this->size());
     l->lower();
     l->show();
+
+    QString buttonStyle = R"(
+        QPushButton {
+            color: white;               /* 白色文字 */
+            text-align: center;         /* 文字居中 */
+            text-decoration: none;      /* 无下划线 */
+            display: inline-block;      /* 行内块 */
+            margin: 4px 2px;            /* 外边距 */
+            border-radius: 8px;         /* 边角弧度 */
+        }
+
+        QPushButton:hover {
+            background-color: #45a049;
+        }
+
+        QPushButton:pressed {
+            background-color: #3e8e41;
+        }
+    )";
+    ui->loginbutton->setStyleSheet(buttonStyle);
 }
 
 void MainWindow::loginJudge(bool b)
