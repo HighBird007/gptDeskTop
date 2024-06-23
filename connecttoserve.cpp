@@ -13,7 +13,7 @@ connecttoserve &connecttoserve::getinstance()
 
 void connecttoserve::startconnect()
 {
-  // socket->connectToHost("127.0.0.1",52310);
+ // socket->connectToHost("127.0.0.1",52310);
   socket->connectToHost("139.196.150.195",52310);
     socket->waitForConnected(3000);
 }
@@ -34,6 +34,7 @@ bool connecttoserve::getloginjudger()
 
 void connecttoserve::sendtoserve(QJsonDocument doc)
 {
+    qDebug()<<doc;
     socket->write(doc.toJson());
 }
 
@@ -50,6 +51,7 @@ void connecttoserve::getLabels()
     QJsonObject o;
     o["type"]="chatLabels";
     sendtoserve(QJsonDocument(o));
+
 }
 
 void connecttoserve::createNewTag()

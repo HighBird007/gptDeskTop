@@ -6,7 +6,6 @@ chatLabelTag::chatLabelTag(int a,QString c) {
     this->setText(content);
     this->setFixedSize(QSize(150,100));
     this->setStyleSheet("border: 1px solid black; margin: 5px; padding: 5px;");
-    //this->setFont();
 }
 
 void chatLabelTag::mouseReleaseEvent(QMouseEvent *)

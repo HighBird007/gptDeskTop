@@ -9,6 +9,8 @@
 #include <QJsonObject>
 #include <chatlabeltag.h>
 #include <QSpacerItem>
+#include <unordered_set>
+#include <connecttoserve.h>
 namespace Ui {
 class chatLabelsShow;
 }
@@ -28,6 +30,7 @@ private:
     QScrollArea *area;
     QWidget *w;
     QSpacerItem *space;
+    std::unordered_set<int> uset;
 private:
     void createtag();
 signals:

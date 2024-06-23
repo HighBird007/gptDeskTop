@@ -17,9 +17,8 @@ chatmain::chatmain(QWidget *parent)
         Q_UNUSED(a);
         ui->scrollArea->verticalScrollBar()->setValue(b);
     });
-
+    connecttoserve::getinstance().getLabels();
 }
-
 chatmain::~chatmain()
 {
     delete ui;
@@ -111,7 +110,7 @@ void chatmain::init()
         userchose = a;
     });
     //获得聊天标签
-    connecttoserve::getinstance().getLabels();
+ //   connecttoserve::getinstance().getLabels();
     connect(cl,&chatLabelsShow::labelId,this,&chatmain::userChangeChat);
 }
 void chatmain::userChangeChat(int id)

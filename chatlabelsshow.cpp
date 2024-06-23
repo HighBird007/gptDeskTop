@@ -20,9 +20,14 @@ chatLabelsShow::~chatLabelsShow()
 std::vector<int> chatLabelsShow::initshow(QJsonObject data)
 {
     std::vector<int> vec;
+    qDebug()<<data;
     QJsonArray arr = data["content"].toArray();
     for(int i = 0 ;i<arr.size();i++){
         QJsonObject d = arr[i].toObject();
+        if(uset.find(d["chatLabelId"].toInt())!=uset.end()){
+            continue;
+        }
+        uset.insert(d["chatLabelId"].toInt());
         chatLabelTag *tag = new chatLabelTag(d["chatLabelId"].toInt(),d["chatLabelContent"].toString());
         connect(tag,&chatLabelTag::labelIdChange,this,[=](int id){
             emit labelId(id);
@@ -36,5 +41,5 @@ std::vector<int> chatLabelsShow::initshow(QJsonObject data)
 
 void chatLabelsShow::createtag()
 {
-    qDebug()<<"click";
+    connecttoserve::getinstance().createNewTag();
 }
