@@ -5,7 +5,7 @@ chatLabelTag::chatLabelTag(int a,QString c) {
     content = c;
     m =new QMenu(this);
     this->setText(content);
-    this->setFixedSize(QSize(100,100));
+    this->setFixedSize(QSize(180,80));
     this->setStyleSheet("border: 1px solid black; margin: 5px; padding: 5px;");
     QAction *d = new QAction("delete",this);
     connect(d,&QAction::triggered,this,[=](){
