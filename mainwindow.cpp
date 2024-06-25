@@ -7,9 +7,45 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     start_connect();
-    this->setFixedSize(this->size());
+
+    // 设置QComboBox的固定大小和字体
+    ui->comboBox->setFixedSize(287, 35);
+    QFont comboBoxFont;
+    comboBoxFont.setFamily("Arial");   // 字体名称，例如 "Arial"
+    comboBoxFont.setPointSize(12);     // 字体大小
+    comboBoxFont.setItalic(false);     // 斜体
+    ui->comboBox->setFont(comboBoxFont);
+    ui->loginbutton->setStyleSheet(
+        "QPushButton {"
+        "   background-color: rgba(128, 128, 128, 128);"  // 半透明背景颜色 (灰色，50% 透明度)
+        "   color: white;"                               // 文字颜色
+        "   border: 2px solid #ffffff;"                  // 边框颜色和宽度
+        "   border-radius: 10px;"                        // 边框圆角
+        "   font-size: 14px;"                            // 字体大小
+        "   padding: 5px 10px;"                          // 内边距
+        "}"
+        "QPushButton:hover {"
+        "   background: qlineargradient("
+        "       spread:pad, x1:0, y1:0, x2:1, y2:0, "
+        "       stop:0 rgba(255, 0, 0, 128), "           // 渐变起点颜色 (红色，50% 透明度)
+        "       stop:1 rgba(0, 0, 255, 128)"             // 渐变终点颜色 (蓝色，50% 透明度)
+        "   );"
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: rgba(0, 0, 0, 150);"       // 按下时的背景颜色 (黑色，40% 透明度)
+        "}"
+        );
+
+    // 设置QLineEdit的固定大小和字体
+    ui->lineEdit->setFixedSize(287, 35);
+    QFont lineEditFont;
+    lineEditFont.setFamily("Arial");   // 字体名称，例如 "Arial"
+    lineEditFont.setPointSize(12);     // 字体大小
+    lineEditFont.setItalic(false);     // 斜体
+    ui->lineEdit->setFont(lineEditFont);
+    this->setFixedSize(420,300);
     this->setWindowTitle("登录");
-    this->setWindowFlags( Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags( Qt::WindowCloseButtonHint);
     this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     initBackGround();
     connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
@@ -77,25 +113,25 @@ void MainWindow::initBackGround()
     l->lower();
     l->show();
 
-    QString buttonStyle = R"(
-        QPushButton {
-            color: white;               /* 白色文字 */
-            text-align: center;         /* 文字居中 */
-            text-decoration: none;      /* 无下划线 */
-            display: inline-block;      /* 行内块 */
-            margin: 4px 2px;            /* 外边距 */
-            border-radius: 8px;         /* 边角弧度 */
-        }
+    // QString buttonStyle = R"(
+    //     QPushButton {
+    //         color: white;               /* 白色文字 */
+    //         text-align: center;         /* 文字居中 */
+    //         text-decoration: none;      /* 无下划线 */
+    //         display: inline-block;      /* 行内块 */
+    //         margin: 4px 2px;            /* 外边距 */
+    //         border-radius: 8px;         /* 边角弧度 */
+    //     }
 
-        QPushButton:hover {
-            background-color: #45a049;
-        }
+    //     QPushButton:hover {
+    //         background-color: #45a049;
+    //     }
 
-        QPushButton:pressed {
-            background-color: #3e8e41;
-        }
-    )";
-    ui->loginbutton->setStyleSheet(buttonStyle);
+    //     QPushButton:pressed {
+    //         background-color: #3e8e41;
+    //     }
+    // )";
+    // ui->loginbutton->setStyleSheet(buttonStyle);
 }
 
 void MainWindow::loginJudge(bool b)

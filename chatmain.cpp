@@ -6,18 +6,21 @@ chatmain::chatmain(QWidget *parent)
     , ui(new Ui::chatmain)
 {
     ui->setupUi(this);
+    ui->pushButton->setFixedSize(100,20);
+    ui->textEdit_2->setFixedSize(1000,100);
+    ui->widget_2->setFixedSize(200,this->height()-20);
     ui->scrollArea->setStyleSheet("QScrollArea { background: transparent; }"
                               "QScrollArea > QWidget > QWidget { background: transparent; }"
                               "QScrollBar:vertical { background: #2D2D30; }"
                               "QScrollBar:horizontal { background: #2D2D30; }");
-    cl = new chatLabelsShow(this);
-    cl->setFixedSize(200,this->height());
+    // ui->scrollArea->setFixedSize(this->width()-300,500);
     init();
     connect(ui->scrollArea->verticalScrollBar(),&QScrollBar::rangeChanged,this,[=](int a,int b){
         Q_UNUSED(a);
         ui->scrollArea->verticalScrollBar()->setValue(b);
     });
     connecttoserve::getinstance().getLabels();
+    ui->textEdit_2->hide();
 }
 chatmain::~chatmain()
 {
@@ -30,7 +33,6 @@ void chatmain::on_pushButton_clicked()
         return ;
     }
     QString content=ui->textEdit_2->toPlainText();
-    chatsqlmodel.insertchat(content,0);
     QJsonObject messageObject;
     messageObject["role"] = "user";
     messageObject["content"] = content;
@@ -80,7 +82,7 @@ void chatmain::init()
     });
       //将获取的聊天标签存进map 设置对应的聊天窗口为nullptr
      connect(&connecttoserve::getinstance(),&connecttoserve::chatLabelsdata,this,[=](QJsonObject o){
-        std::vector<int> vec =cl->initshow(o);
+        std::vector<int> vec =ui->widget_2->initshow(o);
         for(int i= 0 ;i<(int)vec.size();i++){
             int mid = vec[i];
             if(panelmap.find(mid)==panelmap.end()){
@@ -110,8 +112,7 @@ void chatmain::init()
         userchose = a;
     });
     //获得聊天标签
- //   connecttoserve::getinstance().getLabels();
-    connect(cl,&chatLabelsShow::labelId,this,&chatmain::userChangeChat);
+    connect(ui->widget_2,&chatLabelsShow::labelId,this,&chatmain::userChangeChat);
 }
 void chatmain::userChangeChat(int id)
 {
@@ -124,12 +125,6 @@ void chatmain::userChangeChat(int id)
     chatshowwidget *c =(chatshowwidget*)ui->scrollArea->takeWidget();
     panelmap[c->getchatid()] = c;
     ui->scrollArea->setWidget(panelmap[id]);
-}
-void chatmain::on_pushButton_2_clicked()
-{
-    if(cl->isVisible())
-    cl->hide();
-    else
-    cl->show();
+    ui->textEdit_2->show();
 }
 

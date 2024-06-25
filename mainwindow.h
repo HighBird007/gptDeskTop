@@ -9,7 +9,6 @@
 #include <loginsqlmodel.h>
 #include <QMessageBox>
 #include <QPainter>
-#include <udpsocketmodel.h>
 #include <QMovie>
 QT_BEGIN_NAMESPACE
 namespace Ui {

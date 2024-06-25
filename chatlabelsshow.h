@@ -31,8 +31,9 @@ private:
     QWidget *w;
     QSpacerItem *space;
     std::unordered_set<int> uset;
+    int maxid= 0;
 private:
-    void createtag();
+    void createNewLabel();
 signals:
     void labelId(int);
 };

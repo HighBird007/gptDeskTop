@@ -112,3 +112,10 @@ void chatbox::appendtext(QString c)
         this->setFixedHeight(documentHeight +40);
     }
 }
+
+void chatbox::mousePressEvent(QMouseEvent *e)
+{
+    if(e->button() == Qt::RightButton){
+        qDebug()<<"h";
+    }
+}

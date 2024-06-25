@@ -7,13 +7,10 @@
 #include <chatbox.h>
 #include <QVBoxLayout>
 #include <QSpacerItem>
-#include <statusshow.h>
-#include <chatloginmodel.h>
 #include <chatshowwidget.h>
 #include <QLabel>
 #include <QScrollBar>
 #include <QMovie>
-#include <userinfo.h>
 #include <chatlabel.h>
 #include <chatlabelsshow.h>
 namespace Ui {
@@ -29,18 +26,16 @@ public:
     ~chatmain();
 private slots:
     void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-private:
+    private:
     Ui::chatmain *ui;
     QVBoxLayout *l;
     QSpacerItem *s;
     QStringList strlist;
     QString userchose;
-    chatloginmodel chatsqlmodel;
     std::map<int ,chatshowwidget *> panelmap;
     int currentchatid=-1;
     chatLabelsShow *cl;
-
+    QHBoxLayout *hl;
 private:
      void receivehistory(QJsonObject);
      void init();

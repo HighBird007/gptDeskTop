@@ -3,7 +3,7 @@
 
 #include "abstractsqlmodel.h"
 
-class chatloginmodel : public abstractsqlmodel
+class chatloginmodel
 {
 public:
     void initsql();

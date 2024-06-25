@@ -13,8 +13,8 @@ connecttoserve &connecttoserve::getinstance()
 
 void connecttoserve::startconnect()
 {
- // socket->connectToHost("127.0.0.1",52310);
-  socket->connectToHost("139.196.150.195",52310);
+  socket->connectToHost("127.0.0.1",52310);
+  //socket->connectToHost("139.196.150.195",52310);
     socket->waitForConnected(3000);
 }
 
@@ -24,7 +24,7 @@ void connecttoserve::trylogin(QString account, QString password)
     login["type"]="login";
     login["account"]=account;
     login["password"]=password;
-    socket->write(QJsonDocument(login).toJson());
+    socket->write(QJsonDocument(login).toJson()+"LxTcpOverTag");
 }
 
 bool connecttoserve::getloginjudger()
@@ -34,8 +34,7 @@ bool connecttoserve::getloginjudger()
 
 void connecttoserve::sendtoserve(QJsonDocument doc)
 {
-    qDebug()<<doc;
-    socket->write(doc.toJson());
+    socket->write(doc.toJson()+"LxTcpOverTag");
 }
 
 void connecttoserve::gethistory(int id)
@@ -61,6 +60,14 @@ void connecttoserve::createNewTag()
     sendtoserve(QJsonDocument(o));
 }
 
+void connecttoserve::deleteTag(int i)
+{
+    QJsonObject o;
+    o["type"]="deleteTag";
+    o["id"] = i;
+    sendtoserve(QJsonDocument(o));
+}
+
 void connecttoserve::readdata()
 {
     d.append(socket->readAll());
@@ -78,7 +85,6 @@ void connecttoserve::readdata()
 
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject obj = data.object();
-            qDebug()<<obj;
             QString type = obj["type"].toString();
             if (type == "error") {
             } else if (type == "login") {
@@ -89,6 +95,8 @@ void connecttoserve::readdata()
                 emit history(obj);
             }  else if(type =="chatLabels"){
                 emit chatLabelsdata(obj);
+            } else if(type=="createNewTag"){
+                emit newTag();
             }
         }
     }

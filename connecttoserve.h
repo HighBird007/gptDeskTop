@@ -27,6 +27,7 @@ public:
     void gethistory(int id);
     void getLabels();
     void createNewTag();
+    void deleteTag(int i);
    private slots:
     void   readdata();
    signals:
@@ -34,6 +35,7 @@ public:
     void loginjugder(bool);
     void history(QJsonObject);
     void chatLabelsdata(QJsonObject);
+    void newTag();
 };
 #define start_connect() connecttoserve::getinstance().startconnect();
 #define user_login(account,password) connecttoserve::getinstance().trylogin(account,password);

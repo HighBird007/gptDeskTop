@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPixmap>
+#include <QMouseEvent>
 namespace Ui {
 class chatbox;
 }
@@ -18,6 +19,8 @@ public:
     QString getcontent();
     int getpeoormac();
     void appendtext(QString);
+protected:
+     void mousePressEvent(QMouseEvent *e);
 private:
     Ui::chatbox *ui;
     QString con;
