@@ -10,9 +10,34 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 设置QComboBox的固定大小和字体
     ui->comboBox->setFixedSize(287, 35);
+    ui->comboBox->setStyleSheet(
+        "QComboBox#comboBox {"
+        "    background-color: rgba(255, 255, 255, 150);"  // 半透明白色背景
+        "    border: 1px solid gray;"
+        "    border-radius: 5px;"
+        "    padding: 5px;"
+        "}"
+        "QComboBox::drop-down {"
+        "    subcontrol-origin: padding;"
+        "    subcontrol-position: top right;"
+        "    width: 15px;"
+        "    border-left-width: 1px;"
+        "    border-left-color: darkgray;"
+        "    border-left-style: solid;"
+        "    border-top-right-radius: 3px;"
+        "    border-bottom-right-radius: 3px;"
+        "}"
+        "QComboBox::down-arrow {"
+        "    image: url(:/new/prefix1/G:/kk.png);"  // 你可以使用自定义箭头图片
+        "    width: 10px;"  // 调整图片的宽度
+        "    height: 10px;"  // 调整图片的高度
+        "    padding: 2px;"  // 调整图片的填充
+        "}"
+        );
+
     QFont comboBoxFont;
     comboBoxFont.setFamily("Arial");   // 字体名称，例如 "Arial"
-    comboBoxFont.setPointSize(12);     // 字体大小
+    comboBoxFont.setPointSize(14);     // 字体大小
     comboBoxFont.setItalic(false);     // 斜体
     ui->comboBox->setFont(comboBoxFont);
     ui->loginbutton->setStyleSheet(
@@ -38,6 +63,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 设置QLineEdit的固定大小和字体
     ui->lineEdit->setFixedSize(287, 35);
+    ui->lineEdit->setStyleSheet(
+        "QLineEdit {"
+        "    background-color: rgba(255, 255, 255, 150);"  // 半透明白色背景
+        "    border: 1px solid gray;"
+        "    border-radius: 5px;"
+        "    padding: 5px;"
+        "}"
+        "QLineEdit::drop-down {"
+        "    subcontrol-origin: padding;"
+        "    subcontrol-position: top right;"
+        "    width: 15px;"
+        "    border-left-width: 1px;"
+        "    border-left-color: darkgray;"
+        "    border-left-style: solid;"
+        "    border-top-right-radius: 3px;"
+        "    border-bottom-right-radius: 3px;"
+        "}"
+        );
     QFont lineEditFont;
     lineEditFont.setFamily("Arial");   // 字体名称，例如 "Arial"
     lineEditFont.setPointSize(12);     // 字体大小

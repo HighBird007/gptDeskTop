@@ -7,13 +7,13 @@ chatmain::chatmain(QWidget *parent)
 {
     ui->setupUi(this);
     ui->pushButton->setFixedSize(100,20);
+    ui->comboBox->setFixedSize(100,20);
     ui->textEdit_2->setFixedSize(1000,100);
     ui->widget_2->setFixedSize(200,this->height()-20);
     ui->scrollArea->setStyleSheet("QScrollArea { background: transparent; }"
                               "QScrollArea > QWidget > QWidget { background: transparent; }"
                               "QScrollBar:vertical { background: #2D2D30; }"
                               "QScrollBar:horizontal { background: #2D2D30; }");
-    // ui->scrollArea->setFixedSize(this->width()-300,500);
     init();
     connect(ui->scrollArea->verticalScrollBar(),&QScrollBar::rangeChanged,this,[=](int a,int b){
         Q_UNUSED(a);
@@ -21,6 +21,18 @@ chatmain::chatmain(QWidget *parent)
     });
     connecttoserve::getinstance().getLabels();
     ui->textEdit_2->hide();
+    ui->textEdit_2->setStyleSheet(
+        "QTextEdit#textEdit_2 {"
+        "    background-color: rgba(255, 255, 255, 150);"  // 半透明白色背景
+        "    border: 1px solid gray;"
+        "    border-radius: 5px;"
+        "    padding: 5px;"
+        "    color: black;"  // 设置文本颜色为黑色
+        "    font-size: 14px;"  // 设置字体大小
+        "}"
+        );
+    ui->comboBox->hide();
+    ui->pushButton->hide();
 }
 chatmain::~chatmain()
 {
@@ -66,7 +78,7 @@ void chatmain::receivehistory(QJsonObject data)
 void chatmain::init()
 {
     this->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
-    this->setWindowTitle("聊天界面");
+    this->setWindowTitle("ChatGpt");
     this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     //解析gpt的聊天
       connect(&connecttoserve::getinstance(),&connecttoserve::history,this,&chatmain::receivehistory);
@@ -105,7 +117,7 @@ void chatmain::init()
      l->setMovie(m);
      m->start();
     //初始化模型选择combox
-    strlist<<"gpt-4o"<<"gpt-3.5-turbo";
+     strlist<<"gpt-4o"<<"gpt-3.5-turbo"<<"claude-3-5-sonnet-20240620";
     ui->comboBox->addItems(strlist);
     userchose = ui->comboBox->currentText();
     connect(ui->comboBox,&QComboBox::currentTextChanged,this,[&](QString a){
@@ -126,5 +138,14 @@ void chatmain::userChangeChat(int id)
     panelmap[c->getchatid()] = c;
     ui->scrollArea->setWidget(panelmap[id]);
     ui->textEdit_2->show();
+    ui->comboBox->show();
+    ui->pushButton->show();
+}
+
+
+void chatmain::on_pushButton_2_clicked()
+{
+    userChart * c = new userChart;
+    c->show();
 }
 

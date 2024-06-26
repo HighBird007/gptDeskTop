@@ -12,6 +12,7 @@
 #include <QScrollBar>
 #include <QMovie>
 #include <chatlabel.h>
+#include <userchart.h>
 #include <chatlabelsshow.h>
 namespace Ui {
 class chatmain;
@@ -26,7 +27,9 @@ public:
     ~chatmain();
 private slots:
     void on_pushButton_clicked();
-    private:
+    void on_pushButton_2_clicked();
+
+private:
     Ui::chatmain *ui;
     QVBoxLayout *l;
     QSpacerItem *s;

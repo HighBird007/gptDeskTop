@@ -20,7 +20,8 @@ SOURCES += \
     connecttoserve.cpp \
     loginsqlmodel.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    userchart.cpp
 
 HEADERS += \
     chatbox.h \
@@ -30,14 +31,16 @@ HEADERS += \
     chatshowwidget.h \
     connecttoserve.h \
     loginsqlmodel.h \
-    mainwindow.h
+    mainwindow.h \
+    userchart.h
 
 FORMS += \
     chatbox.ui \
     chatlabelsshow.ui \
     chatmain.ui \
     chatshowwidget.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    userchart.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

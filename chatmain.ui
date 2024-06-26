@@ -14,8 +14,8 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="1">
+    <layout class="QFormLayout" name="formLayout_2">
      <item row="0" column="0">
       <widget class="chatLabelsShow" name="widget_2" native="true"/>
      </item>
@@ -31,17 +31,23 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1227</width>
-            <height>197</height>
+            <width>1324</width>
+            <height>388</height>
            </rect>
           </property>
          </widget>
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="text">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QTextEdit" name="textEdit_2"/>
+          <widget class="QTextEdit" name="textEdit_2">
+           <property name="styleSheet">
+            <string notr="true">QTextEdit{
+qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 170, 0, 255), stop:1 rgba(255, 255, 255, 255))
+}</string>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QVBoxLayout" name="send">
@@ -61,17 +67,6 @@
           </layout>
          </item>
         </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QRadioButton" name="radioButton">
-         <property name="text">
-          <string>RadioButton</string>
-         </property>
-        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_2">

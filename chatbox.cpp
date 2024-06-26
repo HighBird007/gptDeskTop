@@ -6,6 +6,16 @@ chatbox::chatbox(QString content,int a,QString id,QWidget *parent)
     , ui(new Ui::chatbox)
 {
     ui->setupUi(this);
+    ui->textEdit->setStyleSheet(
+        "QTextEdit {"
+        "    background-color: rgba(255, 255, 255, 150);"  // 半透明白色背景
+        "    border: 1px solid gray;"
+        "    border-radius: 5px;"
+        "    padding: 5px;"
+        "    color: black;"  // 设置文本颜色为黑色
+        "    font-size: 14px;"  // 设置字体大小
+        "}"
+        );
     if(a){
 
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/openai-black.png").scaled(ui->label->size()));
@@ -20,7 +30,8 @@ chatbox::chatbox(QString content,int a,QString id,QWidget *parent)
     ui->textEdit->setReadOnly(true);
     ui->textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->textEdit->setText(content);ui->textEdit->setMinimumWidth(600);
+    ui->textEdit->setText(content);
+    ui->textEdit->setMinimumWidth(600);
     ui->textEdit->document()->adjustSize();
     QFont ft;
     ft.setFamily(tr("黑体"));
@@ -48,6 +59,16 @@ chatbox::chatbox(QString content, int a)
     : ui(new Ui::chatbox)
 {
     ui->setupUi(this);
+    ui->textEdit->setStyleSheet(
+        "QTextEdit {"
+        "    background-color: rgba(255, 255, 255, 150);"  // 半透明白色背景
+        "    border: 1px solid gray;"
+        "    border-radius: 5px;"
+        "    padding: 5px;"
+        "    color: black;"  // 设置文本颜色为黑色
+        "    font-size: 14px;"  // 设置字体大小
+        "}"
+        );
     if(a){
         ui->label->setPixmap(QPixmap(":/new/prefix1/G:/openai-black.png").scaled(ui->label->size()));
     }else {
@@ -79,7 +100,6 @@ chatbox::chatbox(QString content, int a)
         ui->textEdit->setFixedHeight(documentHeight + 20);
         this->setFixedHeight(documentHeight +40);
     }
- qDebug()<<ui->textEdit->size();
 }
 
 
