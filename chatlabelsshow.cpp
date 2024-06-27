@@ -104,7 +104,7 @@ void chatLabelsShow::createNewLabel()
 {
     connecttoserve::getinstance().createNewTag();
     maxid++;
-    chatLabelTag *t = new chatLabelTag(maxid,QTime::currentTime().toString());
+    chatLabelTag *t = new chatLabelTag(maxid,QDateTime::currentDateTime().toString());
     connect(t,&chatLabelTag::labelIdChange,this,[=](int id){
         emit labelId(id);
     });

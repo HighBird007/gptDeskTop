@@ -8,19 +8,21 @@ userChart::userChart(QWidget *parent)
     ui->setupUi(this);
     initLineChart();
     connect(&connecttoserve::getinstance(),&connecttoserve::chartData,this,[=](QJsonObject obj){
-        qDebug()<<"------------------";
         QJsonArray arr = obj["data"].toArray();
-        qDebug()<<arr;
         QLineSeries *s = new QLineSeries(this);
         QCategoryAxis *axisX = new QCategoryAxis(this);
         axisX->setTitleText("有记录日期");
-          QValueAxis *axisY =new QValueAxis(this);
-        axisY->setRange(0,200);
+        QValueAxis *axisY =new QValueAxis(this);
+        int max = -1;
         for(int i = 0;i<arr.size();i++){
             QJsonObject o = arr[i].toObject();
-            s->append(i,o["usage"].toInt());
-            axisX->append(o["date"].toString(),i);
+            int usage = o["usage"].toInt();
+            QString date = o["date"].toString();
+            s->append(i,usage);
+            axisX->append(date,i);
+            if(max < o["usage"].toInt()) max =o["usage"].toInt() ;
         }
+        axisY->setRange(0,max + 20);
         axisX->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
         c->addSeries(s);
         c->addAxis(axisX,Qt::AlignBottom);
