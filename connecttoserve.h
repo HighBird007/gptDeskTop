@@ -36,6 +36,7 @@ public:
     void history(QJsonObject);
     void chatLabelsdata(QJsonObject);
     void newTag();
+    void chartData(QJsonObject);
 };
 #define start_connect() connecttoserve::getinstance().startconnect();
 #define user_login(account,password) connecttoserve::getinstance().trylogin(account,password);

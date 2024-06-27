@@ -50,7 +50,6 @@ void connecttoserve::getLabels()
     QJsonObject o;
     o["type"]="chatLabels";
     sendtoserve(QJsonDocument(o));
-
 }
 
 void connecttoserve::createNewTag()
@@ -85,6 +84,7 @@ void connecttoserve::readdata()
 
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject obj = data.object();
+            qDebug()<<obj;
             QString type = obj["type"].toString();
             if (type == "error") {
             } else if (type == "login") {
@@ -97,6 +97,8 @@ void connecttoserve::readdata()
                 emit chatLabelsdata(obj);
             } else if(type=="createNewTag"){
                 emit newTag();
+            } else if(type=="chartData"){
+                emit chartData(obj);
             }
         }
     }

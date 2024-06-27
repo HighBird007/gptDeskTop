@@ -146,6 +146,7 @@ void chatmain::userChangeChat(int id)
 void chatmain::on_pushButton_2_clicked()
 {
     userChart * c = new userChart;
+
     c->show();
 }
 
