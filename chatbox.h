@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QMouseEvent>
+#include <QTextCharFormat>
+#include <QRegularExpression>
+#include <QRegularExpressionMatchIterator>
+
 namespace Ui {
 class chatbox;
 }

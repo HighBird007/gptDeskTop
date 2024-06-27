@@ -43,6 +43,7 @@ private:
      void receivehistory(QJsonObject);
      void init();
      void userChangeChat(int id);
+     void userDeleteTag(int id);
 };
 
 #endif // CHATMAIN_H

@@ -52,7 +52,7 @@ chatbox::chatbox(QString content,int a,QString id,QWidget *parent)
     }
 
     chatid =id;
-    qDebug()<<ui->textEdit->size();
+
 }
 
 chatbox::chatbox(QString content, int a)
@@ -100,6 +100,7 @@ chatbox::chatbox(QString content, int a)
         ui->textEdit->setFixedHeight(documentHeight + 20);
         this->setFixedHeight(documentHeight +40);
     }
+
 }
 
 
@@ -121,7 +122,6 @@ int chatbox::getpeoormac()
 void chatbox::appendtext(QString c)
 {
     ui->textEdit->insertPlainText(c);
-
     ui->textEdit->document()->adjustSize();
      int documentHeight = ui->textEdit->document()->size().height();
     if (documentHeight >= 100) {

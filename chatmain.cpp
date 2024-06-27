@@ -48,16 +48,23 @@ void chatmain::on_pushButton_clicked()
     QJsonObject messageObject;
     messageObject["role"] = "user";
     messageObject["content"] = content;
-    QJsonArray messagesArray = panelmap[currentchatid]->gethistorymess();
-    messagesArray.append(messageObject);
+    QJsonObject obj;
     QJsonObject requestBody ;
     requestBody["model"] = userchose;
+    QJsonArray messagesArray;
+    if(userchose=="claude-3-5-sonnet-20240620"){
+        messagesArray.append(messageObject);
+    }
+    else {
+         messagesArray = panelmap[currentchatid]->gethistorymess();
+        messagesArray.append(messageObject);
+    }
     requestBody["messages"] = messagesArray;
-    requestBody["stream"]=true;
-    QJsonObject obj;
+      requestBody["stream"]=true;
     obj["type"]="chat";
     obj["chatId"]=currentchatid;
     obj["data"]=requestBody;
+
     QJsonDocument jsonDoc(obj);
     panelmap[currentchatid]->adduserbox(content);
     connecttoserve::getinstance().sendtoserve(jsonDoc);
@@ -125,28 +132,50 @@ void chatmain::init()
     });
     //获得聊天标签
     connect(ui->widget_2,&chatLabelsShow::labelId,this,&chatmain::userChangeChat);
+    connect(ui->widget_2,&chatLabelsShow::deleteLabelId,this,&chatmain::userDeleteTag);
 }
 void chatmain::userChangeChat(int id)
 {
+
     currentchatid = id;
     if(panelmap[id]==nullptr){
-        chatshowwidget *c =new chatshowwidget;
+        chatshowwidget *c =new chatshowwidget(this);
         panelmap[id]=c;
         connecttoserve::getinstance().gethistory(id);
     }
-    chatshowwidget *c =(chatshowwidget*)ui->scrollArea->takeWidget();
-    panelmap[c->getchatid()] = c;
+    ui->scrollArea->takeWidget();
     ui->scrollArea->setWidget(panelmap[id]);
+
     ui->textEdit_2->show();
     ui->comboBox->show();
     ui->pushButton->show();
+    ui->pushButton->setEnabled(true);
+}
+
+void chatmain::userDeleteTag(int id)
+{
+    auto it = panelmap.find(id);
+    if(it == panelmap.end())
+        return;
+
+    QWidget* pageWidget = it->second;
+    if(pageWidget) {
+        pageWidget->setParent(nullptr);
+        pageWidget->deleteLater();
+    }
+
+    panelmap.erase(it);
+    currentchatid = -1;
+    ui->pushButton->setEnabled(false);
+
+    // 可能需要更新滚动区域或其他UI元素
+    ui->scrollAreaWidgetContents->update();
 }
 
 
 void chatmain::on_pushButton_2_clicked()
 {
     userChart * c = new userChart;
-
     c->show();
 }
 

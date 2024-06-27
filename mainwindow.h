@@ -27,8 +27,6 @@ public:
 private slots:
     void loginbuttonclick();
 
-    void on_pushButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     bool loginjudger=false;

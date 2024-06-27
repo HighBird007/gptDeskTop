@@ -24,6 +24,7 @@ public:
     QJsonArray gethistorymess();
     void addhisbox(chatbox*);
     void adduserbox(QString);
+
 private:
     Ui::chatshowwidget *ui;
     QVBoxLayout *l;

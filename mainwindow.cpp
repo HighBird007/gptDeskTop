@@ -7,7 +7,28 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     start_connect();
+    initBackGround();
+    connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
+    connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,&MainWindow::loginJudge);
+    initAcountAndPassword();
+}
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::loginbuttonclick()
+{
+    a=ui->comboBox->currentText();
+    p=ui->lineEdit->text();
+    user_login(a,p);
+}
+
+
+
+void MainWindow::initBackGround()
+{
     // 设置QComboBox的固定大小和字体
     ui->comboBox->setFixedSize(287, 35);
     ui->comboBox->setStyleSheet(
@@ -90,31 +111,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("登录");
     this->setWindowFlags( Qt::WindowCloseButtonHint);
     this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
-    initBackGround();
-    connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
-    connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,&MainWindow::loginJudge);
-    initAcountAndPassword();
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::loginbuttonclick()
-{
-    a=ui->comboBox->currentText();
-    p=ui->lineEdit->text();
-    user_login(a,p);
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-
-}
-
-void MainWindow::initBackGround()
-{
     l= new QLabel(this);
     int h = QTime::currentTime().hour();
     QString imagePath;
@@ -198,7 +194,6 @@ void MainWindow::initAcountAndPassword()
         passwordset.push_back(vec[i].second);
     }
     if(!vec.empty())ui->lineEdit->setText(passwordset[0]);
-
     connect(ui->comboBox,&QComboBox::currentIndexChanged,this,[=](int a){
         ui->lineEdit->setText(passwordset[a]);
     });

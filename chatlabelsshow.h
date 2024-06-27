@@ -23,6 +23,7 @@ public:
     explicit chatLabelsShow(QWidget *parent = nullptr);
     ~chatLabelsShow();
     std::vector<int> initshow(QJsonObject);
+
 private:
     Ui::chatLabelsShow *ui;
      QVBoxLayout *l;
@@ -30,12 +31,14 @@ private:
     QScrollArea *area;
     QWidget *w;
     QSpacerItem *space;
-    std::unordered_set<int> uset;
     int maxid= 0;
 private:
     void createNewLabel();
+    chatLabelTag *initLabel(int id ,QString c);
+    void initBackground();
 signals:
     void labelId(int);
+    void deleteLabelId(int);
 };
 
 #endif // CHATLABELSSHOW_H

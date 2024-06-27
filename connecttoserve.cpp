@@ -78,13 +78,12 @@ void connecttoserve::readdata()
         }
         // 读取实际数据
         QByteArray jsonData = d.left(endOfJson);
-       d.remove(0, endOfJson + strlen("LxTcpOverTag"));
+        d.remove(0, endOfJson + strlen("LxTcpOverTag"));
         QJsonParseError parseError;
         QJsonDocument data = QJsonDocument::fromJson(jsonData, &parseError);
 
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject obj = data.object();
-            qDebug()<<obj;
             QString type = obj["type"].toString();
             if (type == "error") {
             } else if (type == "login") {

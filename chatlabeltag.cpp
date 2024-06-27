@@ -9,7 +9,6 @@ chatLabelTag::chatLabelTag(int a,QString c) {
     this->setStyleSheet("border: 1px solid black; margin: 5px; padding: 5px;");
     QAction *d = new QAction("delete",this);
     connect(d,&QAction::triggered,this,[=](){
-        qDebug()<<"delete";
         emit deleteSelf(id);
     });
     m->addAction(d);
@@ -18,7 +17,6 @@ chatLabelTag::chatLabelTag(int a,QString c) {
 void chatLabelTag::mouseReleaseEvent(QMouseEvent *)
 {
     emit labelIdChange(id);
-
 }
 
 void chatLabelTag::mousePressEvent(QMouseEvent *e)

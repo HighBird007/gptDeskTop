@@ -9,6 +9,7 @@ userChart::userChart(QWidget *parent)
     initLineChart();
     connect(&connecttoserve::getinstance(),&connecttoserve::chartData,this,[=](QJsonObject obj){
         QJsonArray arr = obj["data"].toArray();
+        c->setTitle("使用折线图");
         QLineSeries *s = new QLineSeries(this);
         QCategoryAxis *axisX = new QCategoryAxis(this);
         axisX->setTitleText("有记录日期");
@@ -29,6 +30,9 @@ userChart::userChart(QWidget *parent)
         c->addAxis(axisY,Qt::AlignLeft);
         s->attachAxis(axisX);
         s->attachAxis(axisY);
+        axisY->setTitleText("使用次数");
+        c->setTitle("嗯很");
+
     });
     QJsonObject o;
     o["type"]="chartData";

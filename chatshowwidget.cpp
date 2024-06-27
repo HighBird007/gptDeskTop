@@ -8,7 +8,6 @@ chatshowwidget::chatshowwidget(QWidget *parent)
     ui->setupUi(this);
     l= new QVBoxLayout;
     this->setLayout(l);
-
 }
 
 chatshowwidget::~chatshowwidget()
