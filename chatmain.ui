@@ -48,7 +48,7 @@ qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 170, 0, 255
 }</string>
            </property>
            <property name="placeholderText">
-            <string>cladude3.5不支持上下文联动但是具有更强的代码能力  gpt正常支持</string>
+            <string>claude3.5不支持上下文联动但是具有更强的代码能力  gpt正常支持</string>
            </property>
           </widget>
          </item>
