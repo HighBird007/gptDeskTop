@@ -31,7 +31,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1257</width>
+            <width>1332</width>
             <height>405</height>
            </rect>
           </property>
@@ -73,7 +73,7 @@ qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 170, 0, 255
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
+     <item row="1" column="1">
       <widget class="QPushButton" name="pushButton_2">
        <property name="text">
         <string>PushButton</string>
