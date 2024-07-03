@@ -6,6 +6,7 @@ chatmain::chatmain(QWidget *parent)
     , ui(new Ui::chatmain)
 {
     ui->setupUi(this);
+    this->setLayout(ui->gridLayout);
     ui->pushButton->setFixedSize(100,20);
     ui->comboBox->setFixedSize(100,20);
     ui->textEdit_2->setFixedSize(1000,100);
