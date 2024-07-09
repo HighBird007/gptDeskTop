@@ -13,6 +13,7 @@
 #include <QMovie>
 #include <chatlabel.h>
 #include <userchart.h>
+#include <QDebug>
 #include <chatlabelsshow.h>
 namespace Ui {
 class chatmain;
@@ -39,11 +40,15 @@ private:
     int currentchatid=-1;
     chatLabelsShow *cl;
     QHBoxLayout *hl;
+    QLabel *label;
+        QMovie *m;
 private:
      void receivehistory(QJsonObject);
      void init();
      void userChangeChat(int id);
      void userDeleteTag(int id);
+ protected:
+     virtual void resizeEvent(QResizeEvent *event) override;
 };
 
 #endif // CHATMAIN_H

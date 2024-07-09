@@ -6,7 +6,6 @@ chatmain::chatmain(QWidget *parent)
     , ui(new Ui::chatmain)
 {
     ui->setupUi(this);
-    this->setLayout(ui->gridLayout);
     ui->pushButton->setFixedSize(100,20);
     ui->comboBox->setFixedSize(100,20);
     ui->textEdit_2->setFixedSize(1000,100);
@@ -34,6 +33,19 @@ chatmain::chatmain(QWidget *parent)
         );
     ui->comboBox->hide();
     ui->pushButton->hide();
+    //设置聊天背景
+    label =new QLabel(this);
+    label->setFixedSize(this->size());
+    label->lower();
+    int  hour = QTime::currentTime().hour();
+    if(hour>=8&&hour<=18){
+        m=new QMovie(":/new/prefix1/G:/nature-4119.gif");
+    }else{
+        m=new QMovie(":/new/prefix1/G:/moon-594.gif");
+    }
+    m->setScaledSize(label->size());
+    label->setMovie(m);
+    m->start();
 }
 chatmain::~chatmain()
 {
@@ -85,7 +97,6 @@ void chatmain::receivehistory(QJsonObject data)
 
 void chatmain::init()
 {
-    this->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
     this->setWindowTitle("ChatGpt");
     this->setWindowIcon(QIcon(QPixmap(":/new/prefix1/G:/openai-black.png")));
     //解析gpt的聊天
@@ -110,20 +121,6 @@ void chatmain::init()
             }
         }
     });
-    //设置聊天背景
-     QLabel *l =new QLabel(this);
-     l->setFixedSize(this->size());
-     l->lower();
-     QMovie *m;
-     int  hour = QTime::currentTime().hour();
-     if(hour>=8&&hour<=18){
-         m=new QMovie(":/new/prefix1/G:/nature-4119.gif");
-     }else{
-         m=new QMovie(":/new/prefix1/G:/moon-594.gif");
-     }
-     m->setScaledSize(l->size());
-     l->setMovie(m);
-     m->start();
     //初始化模型选择combox
      strlist<<"gpt-4o"<<"gpt-3.5-turbo"<<"claude-3-5-sonnet-20240620";
     ui->comboBox->addItems(strlist);
@@ -171,6 +168,14 @@ void chatmain::userDeleteTag(int id)
 
     // 可能需要更新滚动区域或其他UI元素
     ui->scrollAreaWidgetContents->update();
+}
+
+void chatmain::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    //设置聊天背景
+    label->setFixedSize(this->size());
+    m->setScaledSize(this->size());
 }
 
 
