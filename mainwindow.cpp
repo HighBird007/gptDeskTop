@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     start_connect();
     initBackGround();
+    //this->centralWidget()->setLayout(ui->verticalLayout_2);
     connect(ui->loginbutton,&QPushButton::clicked,this,&MainWindow::loginbuttonclick);
     connect(&connecttoserve::getinstance(),&connecttoserve::loginjugder,this,&MainWindow::loginJudge);
     initAcountAndPassword();
